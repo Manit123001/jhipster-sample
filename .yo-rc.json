@@ -1,0 +1,41 @@
+{
+  "generator-jhipster": {
+    "promptValues": {
+      "packageName": "club.eval.jhipster",
+      "nativeLanguage": "zh-cn"
+    },
+    "jhipsterVersion": "4.7.0",
+    "baseName": "jhipsterSample",
+    "packageName": "club.eval.jhipster",
+    "packageFolder": "club/eval/jhipster",
+    "serverPort": "9999",
+    "authenticationType": "uaa",
+    "hibernateCache": "ehcache",
+    "clusteredHttpSession": false,
+    "websocket": false,
+    "databaseType": "sql",
+    "devDatabaseType": "mysql",
+    "prodDatabaseType": "mysql",
+    "searchEngine": "elasticsearch",
+    "messageBroker": "kafka",
+    "serviceDiscoveryType": "consul",
+    "buildTool": "maven",
+    "enableSocialSignIn": false,
+    "enableSwaggerCodegen": true,
+    "enableTranslation": true,
+    "applicationType": "uaa",
+    "testFrameworks": [
+      "gatling",
+      "cucumber"
+    ],
+    "jhiPrefix": "jhi",
+    "otherModules": [],
+    "skipClient": true,
+    "nativeLanguage": "zh-cn",
+    "languages": [
+      "zh-cn",
+      "en"
+    ],
+    "clientPackageManager": "yarn"
+  }
+}
