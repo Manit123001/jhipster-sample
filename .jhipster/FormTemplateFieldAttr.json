@@ -1,0 +1,28 @@
+{
+    "fluentMethods": true,
+    "relationships": [],
+    "fields": [
+        {
+            "fieldName": "fieldid",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "attribute",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "attributevalue",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "description",
+            "fieldType": "String"
+        }
+    ],
+    "changelogDate": "20170829080306",
+    "entityTableName": "form_template_field_attr",
+    "dto": "no",
+    "pagination": "pagination",
+    "service": "serviceImpl",
+    "angularJSSuffix": "mySuperEntities"
+}

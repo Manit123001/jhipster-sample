@@ -1,0 +1,20 @@
+{
+    "fluentMethods": true,
+    "relationships": [],
+    "fields": [
+        {
+            "fieldName": "fieldId",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "optionCode",
+            "fieldType": "String"
+        }
+    ],
+    "changelogDate": "20170829080308",
+    "entityTableName": "form_template_field_options",
+    "dto": "no",
+    "pagination": "pagination",
+    "service": "serviceImpl",
+    "angularJSSuffix": "mySuperEntities"
+}

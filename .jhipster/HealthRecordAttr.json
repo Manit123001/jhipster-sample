@@ -1,0 +1,40 @@
+{
+    "fluentMethods": true,
+    "relationships": [],
+    "fields": [
+        {
+            "fieldName": "templateId",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "templateFieldId",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "fieldName",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "fieldValue",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "isExistRecord",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "recordTable",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "recordField",
+            "fieldType": "String"
+        }
+    ],
+    "changelogDate": "20170829080309",
+    "entityTableName": "health_record_attr",
+    "dto": "no",
+    "pagination": "pagination",
+    "service": "serviceImpl",
+    "angularJSSuffix": "mySuperEntities"
+}

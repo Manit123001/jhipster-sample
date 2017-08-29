@@ -40,6 +40,13 @@ public class CacheConfiguration {
             cm.createCache(club.eval.jhipster.domain.User.class.getName(), jcacheConfiguration);
             cm.createCache(club.eval.jhipster.domain.Authority.class.getName(), jcacheConfiguration);
             cm.createCache(club.eval.jhipster.domain.User.class.getName() + ".authorities", jcacheConfiguration);
+            cm.createCache(club.eval.jhipster.domain.FormTemplate.class.getName(), jcacheConfiguration);
+            cm.createCache(club.eval.jhipster.domain.FormTemplateField.class.getName(), jcacheConfiguration);
+            cm.createCache(club.eval.jhipster.domain.FormTemplateFieldArray.class.getName(), jcacheConfiguration);
+            cm.createCache(club.eval.jhipster.domain.FormTemplateFieldAttr.class.getName(), jcacheConfiguration);
+            cm.createCache(club.eval.jhipster.domain.FormTemplateFieldGroup.class.getName(), jcacheConfiguration);
+            cm.createCache(club.eval.jhipster.domain.FormTemplateFieldOptions.class.getName(), jcacheConfiguration);
+            cm.createCache(club.eval.jhipster.domain.HealthRecordAttr.class.getName(), jcacheConfiguration);
             // jhipster-needle-ehcache-add-entry
         };
     }

@@ -1,0 +1,59 @@
+entity FormTemplate {
+	parentId Long,
+	formId String,
+	name String,
+	description String
+}
+
+entity FormTemplateField {
+	parentId Long,
+	templateId Long,
+	arrayId Long,
+	groupId Long,
+	name String,
+	typeCode String,
+	description String
+}
+
+entity FormTemplateFieldArray {
+	name String,
+	description String
+}
+
+entity FormTemplateFieldAttr {
+	field_id Long,
+	attribute String,
+	attribute_value String,
+	description String
+}
+
+entity FormTemplateFieldGroup {
+	name String,
+	description String
+}
+
+entity FormTemplateFieldOptions {
+	fieldId Long,
+	optionCode String
+}
+
+entity HealthRecordAttr {
+	templateId Long,
+	templateFieldId Long,
+	fieldName String,
+	fieldValue String,
+	isExistRecord Boolean,
+	recordTable String,
+	recordField String
+}
+
+// Set pagination options
+paginate * with pagination
+
+// dto * with mapstruct
+
+// Set service options to all
+service all with serviceImpl
+
+// Set an angular suffix
+angularSuffix * with mySuperEntities
