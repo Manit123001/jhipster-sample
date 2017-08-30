@@ -16,6 +16,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
 
@@ -51,7 +52,7 @@ public class FormTemplateFieldGroupResource {
      */
     @PostMapping("/form-template-field-groups")
     @Timed
-    public ResponseEntity<FormTemplateFieldGroup> createFormTemplateFieldGroup(@RequestBody FormTemplateFieldGroup formTemplateFieldGroup) throws URISyntaxException {
+    public ResponseEntity<FormTemplateFieldGroup> createFormTemplateFieldGroup(@Valid @RequestBody FormTemplateFieldGroup formTemplateFieldGroup) throws URISyntaxException {
         log.debug("REST request to save FormTemplateFieldGroup : {}", formTemplateFieldGroup);
         if (formTemplateFieldGroup.getId() != null) {
             return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert(ENTITY_NAME, "idexists", "A new formTemplateFieldGroup cannot already have an ID")).body(null);
@@ -73,7 +74,7 @@ public class FormTemplateFieldGroupResource {
      */
     @PutMapping("/form-template-field-groups")
     @Timed
-    public ResponseEntity<FormTemplateFieldGroup> updateFormTemplateFieldGroup(@RequestBody FormTemplateFieldGroup formTemplateFieldGroup) throws URISyntaxException {
+    public ResponseEntity<FormTemplateFieldGroup> updateFormTemplateFieldGroup(@Valid @RequestBody FormTemplateFieldGroup formTemplateFieldGroup) throws URISyntaxException {
         log.debug("REST request to update FormTemplateFieldGroup : {}", formTemplateFieldGroup);
         if (formTemplateFieldGroup.getId() == null) {
             return createFormTemplateFieldGroup(formTemplateFieldGroup);

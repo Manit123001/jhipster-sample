@@ -155,6 +155,42 @@ public class FormTemplateFieldAttrResourceIntTest {
 
     @Test
     @Transactional
+    public void checkFieldidIsRequired() throws Exception {
+        int databaseSizeBeforeTest = formTemplateFieldAttrRepository.findAll().size();
+        // set the field null
+        formTemplateFieldAttr.setFieldid(null);
+
+        // Create the FormTemplateFieldAttr, which fails.
+
+        restFormTemplateFieldAttrMockMvc.perform(post("/api/form-template-field-attrs")
+            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .content(TestUtil.convertObjectToJsonBytes(formTemplateFieldAttr)))
+            .andExpect(status().isBadRequest());
+
+        List<FormTemplateFieldAttr> formTemplateFieldAttrList = formTemplateFieldAttrRepository.findAll();
+        assertThat(formTemplateFieldAttrList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
+    public void checkAttributeIsRequired() throws Exception {
+        int databaseSizeBeforeTest = formTemplateFieldAttrRepository.findAll().size();
+        // set the field null
+        formTemplateFieldAttr.setAttribute(null);
+
+        // Create the FormTemplateFieldAttr, which fails.
+
+        restFormTemplateFieldAttrMockMvc.perform(post("/api/form-template-field-attrs")
+            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .content(TestUtil.convertObjectToJsonBytes(formTemplateFieldAttr)))
+            .andExpect(status().isBadRequest());
+
+        List<FormTemplateFieldAttr> formTemplateFieldAttrList = formTemplateFieldAttrRepository.findAll();
+        assertThat(formTemplateFieldAttrList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
     public void getAllFormTemplateFieldAttrs() throws Exception {
         // Initialize the database
         formTemplateFieldAttrRepository.saveAndFlush(formTemplateFieldAttr);

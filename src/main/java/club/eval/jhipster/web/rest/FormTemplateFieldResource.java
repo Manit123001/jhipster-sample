@@ -16,6 +16,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
 
@@ -51,7 +52,7 @@ public class FormTemplateFieldResource {
      */
     @PostMapping("/form-template-fields")
     @Timed
-    public ResponseEntity<FormTemplateField> createFormTemplateField(@RequestBody FormTemplateField formTemplateField) throws URISyntaxException {
+    public ResponseEntity<FormTemplateField> createFormTemplateField(@Valid @RequestBody FormTemplateField formTemplateField) throws URISyntaxException {
         log.debug("REST request to save FormTemplateField : {}", formTemplateField);
         if (formTemplateField.getId() != null) {
             return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert(ENTITY_NAME, "idexists", "A new formTemplateField cannot already have an ID")).body(null);
@@ -73,7 +74,7 @@ public class FormTemplateFieldResource {
      */
     @PutMapping("/form-template-fields")
     @Timed
-    public ResponseEntity<FormTemplateField> updateFormTemplateField(@RequestBody FormTemplateField formTemplateField) throws URISyntaxException {
+    public ResponseEntity<FormTemplateField> updateFormTemplateField(@Valid @RequestBody FormTemplateField formTemplateField) throws URISyntaxException {
         log.debug("REST request to update FormTemplateField : {}", formTemplateField);
         if (formTemplateField.getId() == null) {
             return createFormTemplateField(formTemplateField);

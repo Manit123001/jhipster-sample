@@ -5,6 +5,7 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.springframework.data.elasticsearch.annotations.Document;
 
 import javax.persistence.*;
+import javax.validation.constraints.*;
 import java.io.Serializable;
 import java.util.Objects;
 
@@ -23,10 +24,12 @@ public class FormTemplateFieldOptions implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "field_id")
+    @NotNull
+    @Column(name = "field_id", nullable = false)
     private Long fieldId;
 
-    @Column(name = "option_code")
+    @NotNull
+    @Column(name = "option_code", nullable = false)
     private String optionCode;
 
     // jhipster-needle-entity-add-field - Jhipster will add fields here, do not remove

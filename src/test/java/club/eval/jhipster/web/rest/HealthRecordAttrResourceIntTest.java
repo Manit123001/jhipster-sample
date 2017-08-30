@@ -170,6 +170,78 @@ public class HealthRecordAttrResourceIntTest {
 
     @Test
     @Transactional
+    public void checkTemplateIdIsRequired() throws Exception {
+        int databaseSizeBeforeTest = healthRecordAttrRepository.findAll().size();
+        // set the field null
+        healthRecordAttr.setTemplateId(null);
+
+        // Create the HealthRecordAttr, which fails.
+
+        restHealthRecordAttrMockMvc.perform(post("/api/health-record-attrs")
+            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .content(TestUtil.convertObjectToJsonBytes(healthRecordAttr)))
+            .andExpect(status().isBadRequest());
+
+        List<HealthRecordAttr> healthRecordAttrList = healthRecordAttrRepository.findAll();
+        assertThat(healthRecordAttrList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
+    public void checkTemplateFieldIdIsRequired() throws Exception {
+        int databaseSizeBeforeTest = healthRecordAttrRepository.findAll().size();
+        // set the field null
+        healthRecordAttr.setTemplateFieldId(null);
+
+        // Create the HealthRecordAttr, which fails.
+
+        restHealthRecordAttrMockMvc.perform(post("/api/health-record-attrs")
+            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .content(TestUtil.convertObjectToJsonBytes(healthRecordAttr)))
+            .andExpect(status().isBadRequest());
+
+        List<HealthRecordAttr> healthRecordAttrList = healthRecordAttrRepository.findAll();
+        assertThat(healthRecordAttrList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
+    public void checkFieldNameIsRequired() throws Exception {
+        int databaseSizeBeforeTest = healthRecordAttrRepository.findAll().size();
+        // set the field null
+        healthRecordAttr.setFieldName(null);
+
+        // Create the HealthRecordAttr, which fails.
+
+        restHealthRecordAttrMockMvc.perform(post("/api/health-record-attrs")
+            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .content(TestUtil.convertObjectToJsonBytes(healthRecordAttr)))
+            .andExpect(status().isBadRequest());
+
+        List<HealthRecordAttr> healthRecordAttrList = healthRecordAttrRepository.findAll();
+        assertThat(healthRecordAttrList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
+    public void checkIsExistRecordIsRequired() throws Exception {
+        int databaseSizeBeforeTest = healthRecordAttrRepository.findAll().size();
+        // set the field null
+        healthRecordAttr.setIsExistRecord(null);
+
+        // Create the HealthRecordAttr, which fails.
+
+        restHealthRecordAttrMockMvc.perform(post("/api/health-record-attrs")
+            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .content(TestUtil.convertObjectToJsonBytes(healthRecordAttr)))
+            .andExpect(status().isBadRequest());
+
+        List<HealthRecordAttr> healthRecordAttrList = healthRecordAttrRepository.findAll();
+        assertThat(healthRecordAttrList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
     public void getAllHealthRecordAttrs() throws Exception {
         // Initialize the database
         healthRecordAttrRepository.saveAndFlush(healthRecordAttr);

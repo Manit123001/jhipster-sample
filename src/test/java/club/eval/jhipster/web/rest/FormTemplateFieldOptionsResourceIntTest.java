@@ -145,6 +145,42 @@ public class FormTemplateFieldOptionsResourceIntTest {
 
     @Test
     @Transactional
+    public void checkFieldIdIsRequired() throws Exception {
+        int databaseSizeBeforeTest = formTemplateFieldOptionsRepository.findAll().size();
+        // set the field null
+        formTemplateFieldOptions.setFieldId(null);
+
+        // Create the FormTemplateFieldOptions, which fails.
+
+        restFormTemplateFieldOptionsMockMvc.perform(post("/api/form-template-field-options")
+            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .content(TestUtil.convertObjectToJsonBytes(formTemplateFieldOptions)))
+            .andExpect(status().isBadRequest());
+
+        List<FormTemplateFieldOptions> formTemplateFieldOptionsList = formTemplateFieldOptionsRepository.findAll();
+        assertThat(formTemplateFieldOptionsList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
+    public void checkOptionCodeIsRequired() throws Exception {
+        int databaseSizeBeforeTest = formTemplateFieldOptionsRepository.findAll().size();
+        // set the field null
+        formTemplateFieldOptions.setOptionCode(null);
+
+        // Create the FormTemplateFieldOptions, which fails.
+
+        restFormTemplateFieldOptionsMockMvc.perform(post("/api/form-template-field-options")
+            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .content(TestUtil.convertObjectToJsonBytes(formTemplateFieldOptions)))
+            .andExpect(status().isBadRequest());
+
+        List<FormTemplateFieldOptions> formTemplateFieldOptionsList = formTemplateFieldOptionsRepository.findAll();
+        assertThat(formTemplateFieldOptionsList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
     public void getAllFormTemplateFieldOptions() throws Exception {
         // Initialize the database
         formTemplateFieldOptionsRepository.saveAndFlush(formTemplateFieldOptions);

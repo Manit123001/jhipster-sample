@@ -23,15 +23,15 @@
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="template_id" type="bigint">
-                <constraints nullable="true" />
+                <constraints nullable="false" />
             </column>
 
             <column name="template_field_id" type="bigint">
-                <constraints nullable="true" />
+                <constraints nullable="false" />
             </column>
 
             <column name="field_name" type="varchar(255)">
-                <constraints nullable="true" />
+                <constraints nullable="false" />
             </column>
 
             <column name="field_value" type="varchar(255)">
@@ -39,7 +39,7 @@
             </column>
 
             <column name="is_exist_record" type="bit">
-                <constraints nullable="true" />
+                <constraints nullable="false" />
             </column>
 
             <column name="record_table" type="varchar(255)">

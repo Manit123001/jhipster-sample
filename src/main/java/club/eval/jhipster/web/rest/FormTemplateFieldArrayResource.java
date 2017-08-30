@@ -16,6 +16,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
 
@@ -51,7 +52,7 @@ public class FormTemplateFieldArrayResource {
      */
     @PostMapping("/form-template-field-arrays")
     @Timed
-    public ResponseEntity<FormTemplateFieldArray> createFormTemplateFieldArray(@RequestBody FormTemplateFieldArray formTemplateFieldArray) throws URISyntaxException {
+    public ResponseEntity<FormTemplateFieldArray> createFormTemplateFieldArray(@Valid @RequestBody FormTemplateFieldArray formTemplateFieldArray) throws URISyntaxException {
         log.debug("REST request to save FormTemplateFieldArray : {}", formTemplateFieldArray);
         if (formTemplateFieldArray.getId() != null) {
             return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert(ENTITY_NAME, "idexists", "A new formTemplateFieldArray cannot already have an ID")).body(null);
@@ -73,7 +74,7 @@ public class FormTemplateFieldArrayResource {
      */
     @PutMapping("/form-template-field-arrays")
     @Timed
-    public ResponseEntity<FormTemplateFieldArray> updateFormTemplateFieldArray(@RequestBody FormTemplateFieldArray formTemplateFieldArray) throws URISyntaxException {
+    public ResponseEntity<FormTemplateFieldArray> updateFormTemplateFieldArray(@Valid @RequestBody FormTemplateFieldArray formTemplateFieldArray) throws URISyntaxException {
         log.debug("REST request to update FormTemplateFieldArray : {}", formTemplateFieldArray);
         if (formTemplateFieldArray.getId() == null) {
             return createFormTemplateFieldArray(formTemplateFieldArray);

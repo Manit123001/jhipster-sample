@@ -16,6 +16,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
 
@@ -51,7 +52,7 @@ public class FormTemplateFieldOptionsResource {
      */
     @PostMapping("/form-template-field-options")
     @Timed
-    public ResponseEntity<FormTemplateFieldOptions> createFormTemplateFieldOptions(@RequestBody FormTemplateFieldOptions formTemplateFieldOptions) throws URISyntaxException {
+    public ResponseEntity<FormTemplateFieldOptions> createFormTemplateFieldOptions(@Valid @RequestBody FormTemplateFieldOptions formTemplateFieldOptions) throws URISyntaxException {
         log.debug("REST request to save FormTemplateFieldOptions : {}", formTemplateFieldOptions);
         if (formTemplateFieldOptions.getId() != null) {
             return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert(ENTITY_NAME, "idexists", "A new formTemplateFieldOptions cannot already have an ID")).body(null);
@@ -73,7 +74,7 @@ public class FormTemplateFieldOptionsResource {
      */
     @PutMapping("/form-template-field-options")
     @Timed
-    public ResponseEntity<FormTemplateFieldOptions> updateFormTemplateFieldOptions(@RequestBody FormTemplateFieldOptions formTemplateFieldOptions) throws URISyntaxException {
+    public ResponseEntity<FormTemplateFieldOptions> updateFormTemplateFieldOptions(@Valid @RequestBody FormTemplateFieldOptions formTemplateFieldOptions) throws URISyntaxException {
         log.debug("REST request to update FormTemplateFieldOptions : {}", formTemplateFieldOptions);
         if (formTemplateFieldOptions.getId() == null) {
             return createFormTemplateFieldOptions(formTemplateFieldOptions);

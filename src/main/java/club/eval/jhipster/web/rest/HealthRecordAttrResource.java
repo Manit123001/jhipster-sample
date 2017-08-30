@@ -16,6 +16,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
 
@@ -51,7 +52,7 @@ public class HealthRecordAttrResource {
      */
     @PostMapping("/health-record-attrs")
     @Timed
-    public ResponseEntity<HealthRecordAttr> createHealthRecordAttr(@RequestBody HealthRecordAttr healthRecordAttr) throws URISyntaxException {
+    public ResponseEntity<HealthRecordAttr> createHealthRecordAttr(@Valid @RequestBody HealthRecordAttr healthRecordAttr) throws URISyntaxException {
         log.debug("REST request to save HealthRecordAttr : {}", healthRecordAttr);
         if (healthRecordAttr.getId() != null) {
             return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert(ENTITY_NAME, "idexists", "A new healthRecordAttr cannot already have an ID")).body(null);
@@ -73,7 +74,7 @@ public class HealthRecordAttrResource {
      */
     @PutMapping("/health-record-attrs")
     @Timed
-    public ResponseEntity<HealthRecordAttr> updateHealthRecordAttr(@RequestBody HealthRecordAttr healthRecordAttr) throws URISyntaxException {
+    public ResponseEntity<HealthRecordAttr> updateHealthRecordAttr(@Valid @RequestBody HealthRecordAttr healthRecordAttr) throws URISyntaxException {
         log.debug("REST request to update HealthRecordAttr : {}", healthRecordAttr);
         if (healthRecordAttr.getId() == null) {
             return createHealthRecordAttr(healthRecordAttr);

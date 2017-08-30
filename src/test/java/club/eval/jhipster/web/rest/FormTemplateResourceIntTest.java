@@ -155,6 +155,60 @@ public class FormTemplateResourceIntTest {
 
     @Test
     @Transactional
+    public void checkParentIdIsRequired() throws Exception {
+        int databaseSizeBeforeTest = formTemplateRepository.findAll().size();
+        // set the field null
+        formTemplate.setParentId(null);
+
+        // Create the FormTemplate, which fails.
+
+        restFormTemplateMockMvc.perform(post("/api/form-templates")
+            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .content(TestUtil.convertObjectToJsonBytes(formTemplate)))
+            .andExpect(status().isBadRequest());
+
+        List<FormTemplate> formTemplateList = formTemplateRepository.findAll();
+        assertThat(formTemplateList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
+    public void checkFormIdIsRequired() throws Exception {
+        int databaseSizeBeforeTest = formTemplateRepository.findAll().size();
+        // set the field null
+        formTemplate.setFormId(null);
+
+        // Create the FormTemplate, which fails.
+
+        restFormTemplateMockMvc.perform(post("/api/form-templates")
+            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .content(TestUtil.convertObjectToJsonBytes(formTemplate)))
+            .andExpect(status().isBadRequest());
+
+        List<FormTemplate> formTemplateList = formTemplateRepository.findAll();
+        assertThat(formTemplateList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
+    public void checkNameIsRequired() throws Exception {
+        int databaseSizeBeforeTest = formTemplateRepository.findAll().size();
+        // set the field null
+        formTemplate.setName(null);
+
+        // Create the FormTemplate, which fails.
+
+        restFormTemplateMockMvc.perform(post("/api/form-templates")
+            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .content(TestUtil.convertObjectToJsonBytes(formTemplate)))
+            .andExpect(status().isBadRequest());
+
+        List<FormTemplate> formTemplateList = formTemplateRepository.findAll();
+        assertThat(formTemplateList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
     public void getAllFormTemplates() throws Exception {
         // Initialize the database
         formTemplateRepository.saveAndFlush(formTemplate);

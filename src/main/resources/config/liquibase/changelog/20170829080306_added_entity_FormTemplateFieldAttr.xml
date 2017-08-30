@@ -23,11 +23,11 @@
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="fieldid" type="bigint">
-                <constraints nullable="true" />
+                <constraints nullable="false" />
             </column>
 
             <column name="attribute" type="varchar(255)">
-                <constraints nullable="true" />
+                <constraints nullable="false" />
             </column>
 
             <column name="attributevalue" type="varchar(255)">

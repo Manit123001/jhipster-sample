@@ -145,6 +145,42 @@ public class FormTemplateFieldGroupResourceIntTest {
 
     @Test
     @Transactional
+    public void checkNameIsRequired() throws Exception {
+        int databaseSizeBeforeTest = formTemplateFieldGroupRepository.findAll().size();
+        // set the field null
+        formTemplateFieldGroup.setName(null);
+
+        // Create the FormTemplateFieldGroup, which fails.
+
+        restFormTemplateFieldGroupMockMvc.perform(post("/api/form-template-field-groups")
+            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .content(TestUtil.convertObjectToJsonBytes(formTemplateFieldGroup)))
+            .andExpect(status().isBadRequest());
+
+        List<FormTemplateFieldGroup> formTemplateFieldGroupList = formTemplateFieldGroupRepository.findAll();
+        assertThat(formTemplateFieldGroupList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
+    public void checkDescriptionIsRequired() throws Exception {
+        int databaseSizeBeforeTest = formTemplateFieldGroupRepository.findAll().size();
+        // set the field null
+        formTemplateFieldGroup.setDescription(null);
+
+        // Create the FormTemplateFieldGroup, which fails.
+
+        restFormTemplateFieldGroupMockMvc.perform(post("/api/form-template-field-groups")
+            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .content(TestUtil.convertObjectToJsonBytes(formTemplateFieldGroup)))
+            .andExpect(status().isBadRequest());
+
+        List<FormTemplateFieldGroup> formTemplateFieldGroupList = formTemplateFieldGroupRepository.findAll();
+        assertThat(formTemplateFieldGroupList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
     public void getAllFormTemplateFieldGroups() throws Exception {
         // Initialize the database
         formTemplateFieldGroupRepository.saveAndFlush(formTemplateFieldGroup);

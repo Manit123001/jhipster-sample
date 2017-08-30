@@ -5,6 +5,7 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.springframework.data.elasticsearch.annotations.Document;
 
 import javax.persistence.*;
+import javax.validation.constraints.*;
 import java.io.Serializable;
 import java.util.Objects;
 
@@ -23,10 +24,12 @@ public class FormTemplateFieldAttr implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "fieldid")
+    @NotNull
+    @Column(name = "fieldid", nullable = false)
     private Long fieldid;
 
-    @Column(name = "attribute")
+    @NotNull
+    @Column(name = "attribute", nullable = false)
     private String attribute;
 
     @Column(name = "attributevalue")

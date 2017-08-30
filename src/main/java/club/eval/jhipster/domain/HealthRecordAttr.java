@@ -5,6 +5,7 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.springframework.data.elasticsearch.annotations.Document;
 
 import javax.persistence.*;
+import javax.validation.constraints.*;
 import java.io.Serializable;
 import java.util.Objects;
 
@@ -23,19 +24,23 @@ public class HealthRecordAttr implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "template_id")
+    @NotNull
+    @Column(name = "template_id", nullable = false)
     private Long templateId;
 
-    @Column(name = "template_field_id")
+    @NotNull
+    @Column(name = "template_field_id", nullable = false)
     private Long templateFieldId;
 
-    @Column(name = "field_name")
+    @NotNull
+    @Column(name = "field_name", nullable = false)
     private String fieldName;
 
     @Column(name = "field_value")
     private String fieldValue;
 
-    @Column(name = "is_exist_record")
+    @NotNull
+    @Column(name = "is_exist_record", nullable = false)
     private Boolean isExistRecord;
 
     @Column(name = "record_table")

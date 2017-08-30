@@ -145,6 +145,24 @@ public class FormTemplateFieldArrayResourceIntTest {
 
     @Test
     @Transactional
+    public void checkNameIsRequired() throws Exception {
+        int databaseSizeBeforeTest = formTemplateFieldArrayRepository.findAll().size();
+        // set the field null
+        formTemplateFieldArray.setName(null);
+
+        // Create the FormTemplateFieldArray, which fails.
+
+        restFormTemplateFieldArrayMockMvc.perform(post("/api/form-template-field-arrays")
+            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .content(TestUtil.convertObjectToJsonBytes(formTemplateFieldArray)))
+            .andExpect(status().isBadRequest());
+
+        List<FormTemplateFieldArray> formTemplateFieldArrayList = formTemplateFieldArrayRepository.findAll();
+        assertThat(formTemplateFieldArrayList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
     public void getAllFormTemplateFieldArrays() throws Exception {
         // Initialize the database
         formTemplateFieldArrayRepository.saveAndFlush(formTemplateFieldArray);

@@ -1,48 +1,48 @@
 entity FormTemplate {
-	parentId Long,
-	formId String,
-	name String,
+	parentId Long required,
+	formId String required,
+	name String required,
 	description String
 }
 
 entity FormTemplateField {
-	parentId Long,
-	templateId Long,
-	arrayId Long,
-	groupId Long,
-	name String,
-	typeCode String,
-	description String
+	parentId Long required,
+	templateId Long required,
+	arrayId Long required,
+	groupId Long required,
+	name String required,
+	typeCode String required,
+	description String required
 }
 
 entity FormTemplateFieldArray {
-	name String,
+	name String required,
 	description String
 }
 
 entity FormTemplateFieldAttr {
-	field_id Long,
-	attribute String,
+	field_id Long required,
+	attribute String required,
 	attribute_value String,
 	description String
 }
 
 entity FormTemplateFieldGroup {
-	name String,
-	description String
+	name String required,
+	description String required
 }
 
 entity FormTemplateFieldOptions {
-	fieldId Long,
-	optionCode String
+	fieldId Long required,
+	optionCode String required
 }
 
 entity HealthRecordAttr {
-	templateId Long,
-	templateFieldId Long,
-	fieldName String,
+	templateId Long required,
+	templateFieldId Long required,
+	fieldName String required,
 	fieldValue String,
-	isExistRecord Boolean,
+	isExistRecord Boolean required,
 	recordTable String,
 	recordField String
 }

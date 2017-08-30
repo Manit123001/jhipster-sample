@@ -16,6 +16,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
 
@@ -51,7 +52,7 @@ public class FormTemplateFieldAttrResource {
      */
     @PostMapping("/form-template-field-attrs")
     @Timed
-    public ResponseEntity<FormTemplateFieldAttr> createFormTemplateFieldAttr(@RequestBody FormTemplateFieldAttr formTemplateFieldAttr) throws URISyntaxException {
+    public ResponseEntity<FormTemplateFieldAttr> createFormTemplateFieldAttr(@Valid @RequestBody FormTemplateFieldAttr formTemplateFieldAttr) throws URISyntaxException {
         log.debug("REST request to save FormTemplateFieldAttr : {}", formTemplateFieldAttr);
         if (formTemplateFieldAttr.getId() != null) {
             return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert(ENTITY_NAME, "idexists", "A new formTemplateFieldAttr cannot already have an ID")).body(null);
@@ -73,7 +74,7 @@ public class FormTemplateFieldAttrResource {
      */
     @PutMapping("/form-template-field-attrs")
     @Timed
-    public ResponseEntity<FormTemplateFieldAttr> updateFormTemplateFieldAttr(@RequestBody FormTemplateFieldAttr formTemplateFieldAttr) throws URISyntaxException {
+    public ResponseEntity<FormTemplateFieldAttr> updateFormTemplateFieldAttr(@Valid @RequestBody FormTemplateFieldAttr formTemplateFieldAttr) throws URISyntaxException {
         log.debug("REST request to update FormTemplateFieldAttr : {}", formTemplateFieldAttr);
         if (formTemplateFieldAttr.getId() == null) {
             return createFormTemplateFieldAttr(formTemplateFieldAttr);
