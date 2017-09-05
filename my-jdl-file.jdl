@@ -45,6 +45,7 @@ entity HealthRecordAttr {
 	fieldName String required,
 	fieldValue String,
 	isExistRecord Boolean required,
+	recordId String required,
 	recordTable String,
 	recordField String,
 	isDeleted Boolean required

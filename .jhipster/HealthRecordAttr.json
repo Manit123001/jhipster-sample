@@ -35,12 +35,26 @@
             ]
         },
         {
+            "fieldName": "recordId",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
             "fieldName": "recordTable",
             "fieldType": "String"
         },
         {
             "fieldName": "recordField",
             "fieldType": "String"
+        },
+        {
+            "fieldName": "isDeleted",
+            "fieldType": "Boolean",
+            "fieldValidateRules": [
+                "required"
+            ]
         }
     ],
     "changelogDate": "20170829080309",
