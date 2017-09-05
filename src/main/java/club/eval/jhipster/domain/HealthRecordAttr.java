@@ -43,11 +43,19 @@ public class HealthRecordAttr implements Serializable {
     @Column(name = "is_exist_record", nullable = false)
     private Boolean isExistRecord;
 
+    @NotNull
+    @Column(name = "record_id", nullable = false)
+    private String recordId;
+
     @Column(name = "record_table")
     private String recordTable;
 
     @Column(name = "record_field")
     private String recordField;
+
+    @NotNull
+    @Column(name = "is_deleted", nullable = false)
+    private Boolean isDeleted;
 
     // jhipster-needle-entity-add-field - Jhipster will add fields here, do not remove
     public Long getId() {
@@ -123,6 +131,19 @@ public class HealthRecordAttr implements Serializable {
         this.isExistRecord = isExistRecord;
     }
 
+    public String getRecordId() {
+        return recordId;
+    }
+
+    public HealthRecordAttr recordId(String recordId) {
+        this.recordId = recordId;
+        return this;
+    }
+
+    public void setRecordId(String recordId) {
+        this.recordId = recordId;
+    }
+
     public String getRecordTable() {
         return recordTable;
     }
@@ -147,6 +168,19 @@ public class HealthRecordAttr implements Serializable {
 
     public void setRecordField(String recordField) {
         this.recordField = recordField;
+    }
+
+    public Boolean isIsDeleted() {
+        return isDeleted;
+    }
+
+    public HealthRecordAttr isDeleted(Boolean isDeleted) {
+        this.isDeleted = isDeleted;
+        return this;
+    }
+
+    public void setIsDeleted(Boolean isDeleted) {
+        this.isDeleted = isDeleted;
     }
     // jhipster-needle-entity-add-getters-setters - Jhipster will add getters and setters here, do not remove
 
@@ -179,8 +213,10 @@ public class HealthRecordAttr implements Serializable {
             ", fieldName='" + getFieldName() + "'" +
             ", fieldValue='" + getFieldValue() + "'" +
             ", isExistRecord='" + isIsExistRecord() + "'" +
+            ", recordId='" + getRecordId() + "'" +
             ", recordTable='" + getRecordTable() + "'" +
             ", recordField='" + getRecordField() + "'" +
+            ", isDeleted='" + isIsDeleted() + "'" +
             "}";
     }
 }

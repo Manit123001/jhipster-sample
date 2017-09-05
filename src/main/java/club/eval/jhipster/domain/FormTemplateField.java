@@ -48,8 +48,7 @@ public class FormTemplateField implements Serializable {
     @Column(name = "type_code", nullable = false)
     private String typeCode;
 
-    @NotNull
-    @Column(name = "description", nullable = false)
+    @Column(name = "description")
     private String description;
 
     // jhipster-needle-entity-add-field - Jhipster will add fields here, do not remove

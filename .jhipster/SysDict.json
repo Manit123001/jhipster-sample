@@ -3,19 +3,23 @@
     "relationships": [],
     "fields": [
         {
-            "fieldName": "name",
+            "fieldName": "code",
             "fieldType": "String",
             "fieldValidateRules": [
                 "required"
             ]
         },
         {
+            "fieldName": "value",
+            "fieldType": "String"
+        },
+        {
             "fieldName": "description",
             "fieldType": "String"
         }
     ],
-    "changelogDate": "20170829080307",
-    "entityTableName": "form_template_field_group",
+    "changelogDate": "20170905095338",
+    "entityTableName": "sys_dict",
     "dto": "no",
     "pagination": "pagination",
     "service": "serviceImpl",

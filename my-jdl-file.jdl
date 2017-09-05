@@ -1,3 +1,5 @@
+// jhipster import-jdl ./my-jdl-file.jdl --force
+
 entity FormTemplate {
 	parentId Long required,
 	formId String required,
@@ -44,7 +46,14 @@ entity HealthRecordAttr {
 	fieldValue String,
 	isExistRecord Boolean required,
 	recordTable String,
-	recordField String
+	recordField String,
+	isDeleted Boolean required
+}
+
+entity SysDict {
+	code String required,
+	value String,
+	description String
 }
 
 // Set pagination options

@@ -10,13 +10,13 @@ import java.io.Serializable;
 import java.util.Objects;
 
 /**
- * A FormTemplateFieldGroup.
+ * A SysDict.
  */
 @Entity
-@Table(name = "form_template_field_group")
+@Table(name = "sys_dict")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-@Document(indexName = "formtemplatefieldgroup")
-public class FormTemplateFieldGroup implements Serializable {
+@Document(indexName = "sysdict")
+public class SysDict implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -25,8 +25,11 @@ public class FormTemplateFieldGroup implements Serializable {
     private Long id;
 
     @NotNull
-    @Column(name = "name", nullable = false)
-    private String name;
+    @Column(name = "code", nullable = false)
+    private String code;
+
+    @Column(name = "jhi_value")
+    private String value;
 
     @Column(name = "description")
     private String description;
@@ -40,24 +43,37 @@ public class FormTemplateFieldGroup implements Serializable {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getCode() {
+        return code;
     }
 
-    public FormTemplateFieldGroup name(String name) {
-        this.name = name;
+    public SysDict code(String code) {
+        this.code = code;
         return this;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setCode(String code) {
+        this.code = code;
+    }
+
+    public String getValue() {
+        return value;
+    }
+
+    public SysDict value(String value) {
+        this.value = value;
+        return this;
+    }
+
+    public void setValue(String value) {
+        this.value = value;
     }
 
     public String getDescription() {
         return description;
     }
 
-    public FormTemplateFieldGroup description(String description) {
+    public SysDict description(String description) {
         this.description = description;
         return this;
     }
@@ -75,11 +91,11 @@ public class FormTemplateFieldGroup implements Serializable {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        FormTemplateFieldGroup formTemplateFieldGroup = (FormTemplateFieldGroup) o;
-        if (formTemplateFieldGroup.getId() == null || getId() == null) {
+        SysDict sysDict = (SysDict) o;
+        if (sysDict.getId() == null || getId() == null) {
             return false;
         }
-        return Objects.equals(getId(), formTemplateFieldGroup.getId());
+        return Objects.equals(getId(), sysDict.getId());
     }
 
     @Override
@@ -89,9 +105,10 @@ public class FormTemplateFieldGroup implements Serializable {
 
     @Override
     public String toString() {
-        return "FormTemplateFieldGroup{" +
+        return "SysDict{" +
             "id=" + getId() +
-            ", name='" + getName() + "'" +
+            ", code='" + getCode() + "'" +
+            ", value='" + getValue() + "'" +
             ", description='" + getDescription() + "'" +
             "}";
     }

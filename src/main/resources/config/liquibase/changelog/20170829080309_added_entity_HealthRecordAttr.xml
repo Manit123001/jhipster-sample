@@ -42,12 +42,20 @@
                 <constraints nullable="false" />
             </column>
 
+            <column name="record_id" type="varchar(255)">
+                <constraints nullable="false" />
+            </column>
+
             <column name="record_table" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
 
             <column name="record_field" type="varchar(255)">
                 <constraints nullable="true" />
+            </column>
+
+            <column name="is_deleted" type="bit">
+                <constraints nullable="false" />
             </column>
 
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here, do not remove-->

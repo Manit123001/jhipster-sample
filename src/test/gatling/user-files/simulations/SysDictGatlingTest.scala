@@ -10,9 +10,9 @@ import org.slf4j.LoggerFactory
 import scala.concurrent.duration._
 
 /**
- * Performance test for the HealthRecordAttr entity.
+ * Performance test for the SysDict entity.
  */
-class HealthRecordAttrGatlingTest extends Simulation {
+class SysDictGatlingTest extends Simulation {
 
     val context: LoggerContext = LoggerFactory.getILoggerFactory.asInstanceOf[LoggerContext]
     // Log all HTTP requests
@@ -48,7 +48,7 @@ class HealthRecordAttrGatlingTest extends Simulation {
         "Authorization" -> "Bearer ${access_token}"
     )
 
-    val scn = scenario("Test the HealthRecordAttr entity")
+    val scn = scenario("Test the SysDict entity")
         .exec(http("First unauthenticated request")
         .get("/api/account")
         .headers(headers_http)
@@ -72,26 +72,26 @@ class HealthRecordAttrGatlingTest extends Simulation {
         .check(status.is(200)))
         .pause(10)
         .repeat(2) {
-            exec(http("Get all healthRecordAttrs")
-            .get("/api/health-record-attrs")
+            exec(http("Get all sysDicts")
+            .get("/api/sys-dicts")
             .headers(headers_http_authenticated)
             .check(status.is(200)))
             .pause(10 seconds, 20 seconds)
-            .exec(http("Create new healthRecordAttr")
-            .post("/api/health-record-attrs")
+            .exec(http("Create new sysDict")
+            .post("/api/sys-dicts")
             .headers(headers_http_authenticated)
-            .body(StringBody("""{"id":null, "templateId":null, "templateFieldId":null, "fieldName":"SAMPLE_TEXT", "fieldValue":"SAMPLE_TEXT", "isExistRecord":null, "recordId":"SAMPLE_TEXT", "recordTable":"SAMPLE_TEXT", "recordField":"SAMPLE_TEXT", "isDeleted":null}""")).asJSON
+            .body(StringBody("""{"id":null, "code":"SAMPLE_TEXT", "value":"SAMPLE_TEXT", "description":"SAMPLE_TEXT"}""")).asJSON
             .check(status.is(201))
-            .check(headerRegex("Location", "(.*)").saveAs("new_healthRecordAttr_url"))).exitHereIfFailed
+            .check(headerRegex("Location", "(.*)").saveAs("new_sysDict_url"))).exitHereIfFailed
             .pause(10)
             .repeat(5) {
-                exec(http("Get created healthRecordAttr")
-                .get("${new_healthRecordAttr_url}")
+                exec(http("Get created sysDict")
+                .get("${new_sysDict_url}")
                 .headers(headers_http_authenticated))
                 .pause(10)
             }
-            .exec(http("Delete created healthRecordAttr")
-            .delete("${new_healthRecordAttr_url}")
+            .exec(http("Delete created sysDict")
+            .delete("${new_sysDict_url}")
             .headers(headers_http_authenticated))
             .pause(10)
         }

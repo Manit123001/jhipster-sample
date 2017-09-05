@@ -278,24 +278,6 @@ public class FormTemplateFieldResourceIntTest {
 
     @Test
     @Transactional
-    public void checkDescriptionIsRequired() throws Exception {
-        int databaseSizeBeforeTest = formTemplateFieldRepository.findAll().size();
-        // set the field null
-        formTemplateField.setDescription(null);
-
-        // Create the FormTemplateField, which fails.
-
-        restFormTemplateFieldMockMvc.perform(post("/api/form-template-fields")
-            .contentType(TestUtil.APPLICATION_JSON_UTF8)
-            .content(TestUtil.convertObjectToJsonBytes(formTemplateField)))
-            .andExpect(status().isBadRequest());
-
-        List<FormTemplateField> formTemplateFieldList = formTemplateFieldRepository.findAll();
-        assertThat(formTemplateFieldList).hasSize(databaseSizeBeforeTest);
-    }
-
-    @Test
-    @Transactional
     public void getAllFormTemplateFields() throws Exception {
         // Initialize the database
         formTemplateFieldRepository.saveAndFlush(formTemplateField);
