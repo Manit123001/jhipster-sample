@@ -61,6 +61,6 @@
     "entityTableName": "health_record_attr",
     "dto": "no",
     "pagination": "pagination",
-    "service": "serviceImpl",
+    "service": "serviceClass",
     "angularJSSuffix": "mySuperEntities"
 }

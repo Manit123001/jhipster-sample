@@ -22,6 +22,6 @@
     "entityTableName": "sys_dict",
     "dto": "no",
     "pagination": "pagination",
-    "service": "serviceImpl",
+    "service": "serviceClass",
     "angularJSSuffix": "mySuperEntities"
 }

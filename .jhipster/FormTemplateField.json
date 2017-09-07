@@ -53,6 +53,6 @@
     "entityTableName": "form_template_field",
     "dto": "no",
     "pagination": "pagination",
-    "service": "serviceImpl",
+    "service": "serviceClass",
     "angularJSSuffix": "mySuperEntities"
 }
