@@ -42,8 +42,32 @@
                 <constraints nullable="false" />
             </column>
 
+            <column name="jhi_label" type="varchar(255)">
+                <constraints nullable="false" />
+            </column>
+
             <column name="dict_type" type="varchar(255)">
                 <constraints nullable="false" />
+            </column>
+
+            <column name="jhi_sort" type="integer">
+                <constraints nullable="false" />
+            </column>
+
+            <column name="is_exist_record" type="bit">
+                <constraints nullable="false" />
+            </column>
+
+            <column name="record_id" type="varchar(255)">
+                <constraints nullable="false" />
+            </column>
+
+            <column name="record_table" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="record_field" type="varchar(255)">
+                <constraints nullable="true" />
             </column>
 
             <column name="description" type="varchar(255)">

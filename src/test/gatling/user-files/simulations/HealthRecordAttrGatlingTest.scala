@@ -80,7 +80,7 @@ class HealthRecordAttrGatlingTest extends Simulation {
             .exec(http("Create new healthRecordAttr")
             .post("/api/health-record-attrs")
             .headers(headers_http_authenticated)
-            .body(StringBody("""{"id":null, "templateId":null, "templateFieldId":null, "fieldName":"SAMPLE_TEXT", "fieldValue":"SAMPLE_TEXT", "isExistRecord":null, "recordId":"SAMPLE_TEXT", "recordTable":"SAMPLE_TEXT", "recordField":"SAMPLE_TEXT", "isDeleted":null}""")).asJSON
+            .body(StringBody("""{"id":null, "templateId":null, "templateFieldId":null, "fieldName":"SAMPLE_TEXT", "fieldValue":"SAMPLE_TEXT", "isDeleted":null}""")).asJSON
             .check(status.is(201))
             .check(headerRegex("Location", "(.*)").saveAs("new_healthRecordAttr_url"))).exitHereIfFailed
             .pause(10)

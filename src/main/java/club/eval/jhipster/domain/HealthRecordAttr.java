@@ -40,20 +40,6 @@ public class HealthRecordAttr implements Serializable {
     private String fieldValue;
 
     @NotNull
-    @Column(name = "is_exist_record", nullable = false)
-    private Boolean isExistRecord;
-
-    @NotNull
-    @Column(name = "record_id", nullable = false)
-    private String recordId;
-
-    @Column(name = "record_table")
-    private String recordTable;
-
-    @Column(name = "record_field")
-    private String recordField;
-
-    @NotNull
     @Column(name = "is_deleted", nullable = false)
     private Boolean isDeleted;
 
@@ -118,58 +104,6 @@ public class HealthRecordAttr implements Serializable {
         this.fieldValue = fieldValue;
     }
 
-    public Boolean isIsExistRecord() {
-        return isExistRecord;
-    }
-
-    public HealthRecordAttr isExistRecord(Boolean isExistRecord) {
-        this.isExistRecord = isExistRecord;
-        return this;
-    }
-
-    public void setIsExistRecord(Boolean isExistRecord) {
-        this.isExistRecord = isExistRecord;
-    }
-
-    public String getRecordId() {
-        return recordId;
-    }
-
-    public HealthRecordAttr recordId(String recordId) {
-        this.recordId = recordId;
-        return this;
-    }
-
-    public void setRecordId(String recordId) {
-        this.recordId = recordId;
-    }
-
-    public String getRecordTable() {
-        return recordTable;
-    }
-
-    public HealthRecordAttr recordTable(String recordTable) {
-        this.recordTable = recordTable;
-        return this;
-    }
-
-    public void setRecordTable(String recordTable) {
-        this.recordTable = recordTable;
-    }
-
-    public String getRecordField() {
-        return recordField;
-    }
-
-    public HealthRecordAttr recordField(String recordField) {
-        this.recordField = recordField;
-        return this;
-    }
-
-    public void setRecordField(String recordField) {
-        this.recordField = recordField;
-    }
-
     public Boolean isIsDeleted() {
         return isDeleted;
     }
@@ -212,10 +146,6 @@ public class HealthRecordAttr implements Serializable {
             ", templateFieldId='" + getTemplateFieldId() + "'" +
             ", fieldName='" + getFieldName() + "'" +
             ", fieldValue='" + getFieldValue() + "'" +
-            ", isExistRecord='" + isIsExistRecord() + "'" +
-            ", recordId='" + getRecordId() + "'" +
-            ", recordTable='" + getRecordTable() + "'" +
-            ", recordField='" + getRecordField() + "'" +
             ", isDeleted='" + isIsDeleted() + "'" +
             "}";
     }

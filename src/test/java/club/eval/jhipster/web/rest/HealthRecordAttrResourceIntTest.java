@@ -53,18 +53,6 @@ public class HealthRecordAttrResourceIntTest {
     private static final String DEFAULT_FIELD_VALUE = "AAAAAAAAAA";
     private static final String UPDATED_FIELD_VALUE = "BBBBBBBBBB";
 
-    private static final Boolean DEFAULT_IS_EXIST_RECORD = false;
-    private static final Boolean UPDATED_IS_EXIST_RECORD = true;
-
-    private static final String DEFAULT_RECORD_ID = "AAAAAAAAAA";
-    private static final String UPDATED_RECORD_ID = "BBBBBBBBBB";
-
-    private static final String DEFAULT_RECORD_TABLE = "AAAAAAAAAA";
-    private static final String UPDATED_RECORD_TABLE = "BBBBBBBBBB";
-
-    private static final String DEFAULT_RECORD_FIELD = "AAAAAAAAAA";
-    private static final String UPDATED_RECORD_FIELD = "BBBBBBBBBB";
-
     private static final Boolean DEFAULT_IS_DELETED = false;
     private static final Boolean UPDATED_IS_DELETED = true;
 
@@ -115,10 +103,6 @@ public class HealthRecordAttrResourceIntTest {
             .templateFieldId(DEFAULT_TEMPLATE_FIELD_ID)
             .fieldName(DEFAULT_FIELD_NAME)
             .fieldValue(DEFAULT_FIELD_VALUE)
-            .isExistRecord(DEFAULT_IS_EXIST_RECORD)
-            .recordId(DEFAULT_RECORD_ID)
-            .recordTable(DEFAULT_RECORD_TABLE)
-            .recordField(DEFAULT_RECORD_FIELD)
             .isDeleted(DEFAULT_IS_DELETED);
         return healthRecordAttr;
     }
@@ -148,10 +132,6 @@ public class HealthRecordAttrResourceIntTest {
         assertThat(testHealthRecordAttr.getTemplateFieldId()).isEqualTo(DEFAULT_TEMPLATE_FIELD_ID);
         assertThat(testHealthRecordAttr.getFieldName()).isEqualTo(DEFAULT_FIELD_NAME);
         assertThat(testHealthRecordAttr.getFieldValue()).isEqualTo(DEFAULT_FIELD_VALUE);
-        assertThat(testHealthRecordAttr.isIsExistRecord()).isEqualTo(DEFAULT_IS_EXIST_RECORD);
-        assertThat(testHealthRecordAttr.getRecordId()).isEqualTo(DEFAULT_RECORD_ID);
-        assertThat(testHealthRecordAttr.getRecordTable()).isEqualTo(DEFAULT_RECORD_TABLE);
-        assertThat(testHealthRecordAttr.getRecordField()).isEqualTo(DEFAULT_RECORD_FIELD);
         assertThat(testHealthRecordAttr.isIsDeleted()).isEqualTo(DEFAULT_IS_DELETED);
 
         // Validate the HealthRecordAttr in Elasticsearch
@@ -234,42 +214,6 @@ public class HealthRecordAttrResourceIntTest {
 
     @Test
     @Transactional
-    public void checkIsExistRecordIsRequired() throws Exception {
-        int databaseSizeBeforeTest = healthRecordAttrRepository.findAll().size();
-        // set the field null
-        healthRecordAttr.setIsExistRecord(null);
-
-        // Create the HealthRecordAttr, which fails.
-
-        restHealthRecordAttrMockMvc.perform(post("/api/health-record-attrs")
-            .contentType(TestUtil.APPLICATION_JSON_UTF8)
-            .content(TestUtil.convertObjectToJsonBytes(healthRecordAttr)))
-            .andExpect(status().isBadRequest());
-
-        List<HealthRecordAttr> healthRecordAttrList = healthRecordAttrRepository.findAll();
-        assertThat(healthRecordAttrList).hasSize(databaseSizeBeforeTest);
-    }
-
-    @Test
-    @Transactional
-    public void checkRecordIdIsRequired() throws Exception {
-        int databaseSizeBeforeTest = healthRecordAttrRepository.findAll().size();
-        // set the field null
-        healthRecordAttr.setRecordId(null);
-
-        // Create the HealthRecordAttr, which fails.
-
-        restHealthRecordAttrMockMvc.perform(post("/api/health-record-attrs")
-            .contentType(TestUtil.APPLICATION_JSON_UTF8)
-            .content(TestUtil.convertObjectToJsonBytes(healthRecordAttr)))
-            .andExpect(status().isBadRequest());
-
-        List<HealthRecordAttr> healthRecordAttrList = healthRecordAttrRepository.findAll();
-        assertThat(healthRecordAttrList).hasSize(databaseSizeBeforeTest);
-    }
-
-    @Test
-    @Transactional
     public void checkIsDeletedIsRequired() throws Exception {
         int databaseSizeBeforeTest = healthRecordAttrRepository.findAll().size();
         // set the field null
@@ -301,10 +245,6 @@ public class HealthRecordAttrResourceIntTest {
             .andExpect(jsonPath("$.[*].templateFieldId").value(hasItem(DEFAULT_TEMPLATE_FIELD_ID.intValue())))
             .andExpect(jsonPath("$.[*].fieldName").value(hasItem(DEFAULT_FIELD_NAME.toString())))
             .andExpect(jsonPath("$.[*].fieldValue").value(hasItem(DEFAULT_FIELD_VALUE.toString())))
-            .andExpect(jsonPath("$.[*].isExistRecord").value(hasItem(DEFAULT_IS_EXIST_RECORD.booleanValue())))
-            .andExpect(jsonPath("$.[*].recordId").value(hasItem(DEFAULT_RECORD_ID.toString())))
-            .andExpect(jsonPath("$.[*].recordTable").value(hasItem(DEFAULT_RECORD_TABLE.toString())))
-            .andExpect(jsonPath("$.[*].recordField").value(hasItem(DEFAULT_RECORD_FIELD.toString())))
             .andExpect(jsonPath("$.[*].isDeleted").value(hasItem(DEFAULT_IS_DELETED.booleanValue())));
     }
 
@@ -323,10 +263,6 @@ public class HealthRecordAttrResourceIntTest {
             .andExpect(jsonPath("$.templateFieldId").value(DEFAULT_TEMPLATE_FIELD_ID.intValue()))
             .andExpect(jsonPath("$.fieldName").value(DEFAULT_FIELD_NAME.toString()))
             .andExpect(jsonPath("$.fieldValue").value(DEFAULT_FIELD_VALUE.toString()))
-            .andExpect(jsonPath("$.isExistRecord").value(DEFAULT_IS_EXIST_RECORD.booleanValue()))
-            .andExpect(jsonPath("$.recordId").value(DEFAULT_RECORD_ID.toString()))
-            .andExpect(jsonPath("$.recordTable").value(DEFAULT_RECORD_TABLE.toString()))
-            .andExpect(jsonPath("$.recordField").value(DEFAULT_RECORD_FIELD.toString()))
             .andExpect(jsonPath("$.isDeleted").value(DEFAULT_IS_DELETED.booleanValue()));
     }
 
@@ -353,10 +289,6 @@ public class HealthRecordAttrResourceIntTest {
             .templateFieldId(UPDATED_TEMPLATE_FIELD_ID)
             .fieldName(UPDATED_FIELD_NAME)
             .fieldValue(UPDATED_FIELD_VALUE)
-            .isExistRecord(UPDATED_IS_EXIST_RECORD)
-            .recordId(UPDATED_RECORD_ID)
-            .recordTable(UPDATED_RECORD_TABLE)
-            .recordField(UPDATED_RECORD_FIELD)
             .isDeleted(UPDATED_IS_DELETED);
 
         restHealthRecordAttrMockMvc.perform(put("/api/health-record-attrs")
@@ -372,10 +304,6 @@ public class HealthRecordAttrResourceIntTest {
         assertThat(testHealthRecordAttr.getTemplateFieldId()).isEqualTo(UPDATED_TEMPLATE_FIELD_ID);
         assertThat(testHealthRecordAttr.getFieldName()).isEqualTo(UPDATED_FIELD_NAME);
         assertThat(testHealthRecordAttr.getFieldValue()).isEqualTo(UPDATED_FIELD_VALUE);
-        assertThat(testHealthRecordAttr.isIsExistRecord()).isEqualTo(UPDATED_IS_EXIST_RECORD);
-        assertThat(testHealthRecordAttr.getRecordId()).isEqualTo(UPDATED_RECORD_ID);
-        assertThat(testHealthRecordAttr.getRecordTable()).isEqualTo(UPDATED_RECORD_TABLE);
-        assertThat(testHealthRecordAttr.getRecordField()).isEqualTo(UPDATED_RECORD_FIELD);
         assertThat(testHealthRecordAttr.isIsDeleted()).isEqualTo(UPDATED_IS_DELETED);
 
         // Validate the HealthRecordAttr in Elasticsearch
@@ -438,10 +366,6 @@ public class HealthRecordAttrResourceIntTest {
             .andExpect(jsonPath("$.[*].templateFieldId").value(hasItem(DEFAULT_TEMPLATE_FIELD_ID.intValue())))
             .andExpect(jsonPath("$.[*].fieldName").value(hasItem(DEFAULT_FIELD_NAME.toString())))
             .andExpect(jsonPath("$.[*].fieldValue").value(hasItem(DEFAULT_FIELD_VALUE.toString())))
-            .andExpect(jsonPath("$.[*].isExistRecord").value(hasItem(DEFAULT_IS_EXIST_RECORD.booleanValue())))
-            .andExpect(jsonPath("$.[*].recordId").value(hasItem(DEFAULT_RECORD_ID.toString())))
-            .andExpect(jsonPath("$.[*].recordTable").value(hasItem(DEFAULT_RECORD_TABLE.toString())))
-            .andExpect(jsonPath("$.[*].recordField").value(hasItem(DEFAULT_RECORD_FIELD.toString())))
             .andExpect(jsonPath("$.[*].isDeleted").value(hasItem(DEFAULT_IS_DELETED.booleanValue())));
     }
 

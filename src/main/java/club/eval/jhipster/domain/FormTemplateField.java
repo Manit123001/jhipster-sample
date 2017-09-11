@@ -45,8 +45,30 @@ public class FormTemplateField implements Serializable {
     private String name;
 
     @NotNull
+    @Column(name = "jhi_label", nullable = false)
+    private String label;
+
+    @NotNull
     @Column(name = "dict_type", nullable = false)
     private String dictType;
+
+    @NotNull
+    @Column(name = "jhi_sort", nullable = false)
+    private Integer sort;
+
+    @NotNull
+    @Column(name = "is_exist_record", nullable = false)
+    private Boolean isExistRecord;
+
+    @NotNull
+    @Column(name = "record_id", nullable = false)
+    private String recordId;
+
+    @Column(name = "record_table")
+    private String recordTable;
+
+    @Column(name = "record_field")
+    private String recordField;
 
     @Column(name = "description")
     private String description;
@@ -125,6 +147,19 @@ public class FormTemplateField implements Serializable {
         this.name = name;
     }
 
+    public String getLabel() {
+        return label;
+    }
+
+    public FormTemplateField label(String label) {
+        this.label = label;
+        return this;
+    }
+
+    public void setLabel(String label) {
+        this.label = label;
+    }
+
     public String getDictType() {
         return dictType;
     }
@@ -136,6 +171,71 @@ public class FormTemplateField implements Serializable {
 
     public void setDictType(String dictType) {
         this.dictType = dictType;
+    }
+
+    public Integer getSort() {
+        return sort;
+    }
+
+    public FormTemplateField sort(Integer sort) {
+        this.sort = sort;
+        return this;
+    }
+
+    public void setSort(Integer sort) {
+        this.sort = sort;
+    }
+
+    public Boolean isIsExistRecord() {
+        return isExistRecord;
+    }
+
+    public FormTemplateField isExistRecord(Boolean isExistRecord) {
+        this.isExistRecord = isExistRecord;
+        return this;
+    }
+
+    public void setIsExistRecord(Boolean isExistRecord) {
+        this.isExistRecord = isExistRecord;
+    }
+
+    public String getRecordId() {
+        return recordId;
+    }
+
+    public FormTemplateField recordId(String recordId) {
+        this.recordId = recordId;
+        return this;
+    }
+
+    public void setRecordId(String recordId) {
+        this.recordId = recordId;
+    }
+
+    public String getRecordTable() {
+        return recordTable;
+    }
+
+    public FormTemplateField recordTable(String recordTable) {
+        this.recordTable = recordTable;
+        return this;
+    }
+
+    public void setRecordTable(String recordTable) {
+        this.recordTable = recordTable;
+    }
+
+    public String getRecordField() {
+        return recordField;
+    }
+
+    public FormTemplateField recordField(String recordField) {
+        this.recordField = recordField;
+        return this;
+    }
+
+    public void setRecordField(String recordField) {
+        this.recordField = recordField;
     }
 
     public String getDescription() {
@@ -181,7 +281,13 @@ public class FormTemplateField implements Serializable {
             ", arrayId='" + getArrayId() + "'" +
             ", groupId='" + getGroupId() + "'" +
             ", name='" + getName() + "'" +
+            ", label='" + getLabel() + "'" +
             ", dictType='" + getDictType() + "'" +
+            ", sort='" + getSort() + "'" +
+            ", isExistRecord='" + isIsExistRecord() + "'" +
+            ", recordId='" + getRecordId() + "'" +
+            ", recordTable='" + getRecordTable() + "'" +
+            ", recordField='" + getRecordField() + "'" +
             ", description='" + getDescription() + "'" +
             "}";
     }

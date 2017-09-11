@@ -13,7 +13,13 @@ entity FormTemplateField {
 	arrayId Long required,
 	groupId Long required,
 	name String required,
+	label String required,
 	dictType String required,
+	sort Integer required,
+	isExistRecord Boolean required,
+	recordId String required,
+	recordTable String,
+	recordField String,
 	description String
 }
 
@@ -44,10 +50,6 @@ entity HealthRecordAttr {
 	templateFieldId Long required,
 	fieldName String required,
 	fieldValue String,
-	isExistRecord Boolean required,
-	recordId String required,
-	recordTable String,
-	recordField String,
 	isDeleted Boolean required
 }
 

@@ -56,8 +56,26 @@ public class FormTemplateFieldResourceIntTest {
     private static final String DEFAULT_NAME = "AAAAAAAAAA";
     private static final String UPDATED_NAME = "BBBBBBBBBB";
 
+    private static final String DEFAULT_LABEL = "AAAAAAAAAA";
+    private static final String UPDATED_LABEL = "BBBBBBBBBB";
+
     private static final String DEFAULT_DICT_TYPE = "AAAAAAAAAA";
     private static final String UPDATED_DICT_TYPE = "BBBBBBBBBB";
+
+    private static final Integer DEFAULT_SORT = 1;
+    private static final Integer UPDATED_SORT = 2;
+
+    private static final Boolean DEFAULT_IS_EXIST_RECORD = false;
+    private static final Boolean UPDATED_IS_EXIST_RECORD = true;
+
+    private static final String DEFAULT_RECORD_ID = "AAAAAAAAAA";
+    private static final String UPDATED_RECORD_ID = "BBBBBBBBBB";
+
+    private static final String DEFAULT_RECORD_TABLE = "AAAAAAAAAA";
+    private static final String UPDATED_RECORD_TABLE = "BBBBBBBBBB";
+
+    private static final String DEFAULT_RECORD_FIELD = "AAAAAAAAAA";
+    private static final String UPDATED_RECORD_FIELD = "BBBBBBBBBB";
 
     private static final String DEFAULT_DESCRIPTION = "AAAAAAAAAA";
     private static final String UPDATED_DESCRIPTION = "BBBBBBBBBB";
@@ -110,7 +128,13 @@ public class FormTemplateFieldResourceIntTest {
             .arrayId(DEFAULT_ARRAY_ID)
             .groupId(DEFAULT_GROUP_ID)
             .name(DEFAULT_NAME)
+            .label(DEFAULT_LABEL)
             .dictType(DEFAULT_DICT_TYPE)
+            .sort(DEFAULT_SORT)
+            .isExistRecord(DEFAULT_IS_EXIST_RECORD)
+            .recordId(DEFAULT_RECORD_ID)
+            .recordTable(DEFAULT_RECORD_TABLE)
+            .recordField(DEFAULT_RECORD_FIELD)
             .description(DEFAULT_DESCRIPTION);
         return formTemplateField;
     }
@@ -141,7 +165,13 @@ public class FormTemplateFieldResourceIntTest {
         assertThat(testFormTemplateField.getArrayId()).isEqualTo(DEFAULT_ARRAY_ID);
         assertThat(testFormTemplateField.getGroupId()).isEqualTo(DEFAULT_GROUP_ID);
         assertThat(testFormTemplateField.getName()).isEqualTo(DEFAULT_NAME);
+        assertThat(testFormTemplateField.getLabel()).isEqualTo(DEFAULT_LABEL);
         assertThat(testFormTemplateField.getDictType()).isEqualTo(DEFAULT_DICT_TYPE);
+        assertThat(testFormTemplateField.getSort()).isEqualTo(DEFAULT_SORT);
+        assertThat(testFormTemplateField.isIsExistRecord()).isEqualTo(DEFAULT_IS_EXIST_RECORD);
+        assertThat(testFormTemplateField.getRecordId()).isEqualTo(DEFAULT_RECORD_ID);
+        assertThat(testFormTemplateField.getRecordTable()).isEqualTo(DEFAULT_RECORD_TABLE);
+        assertThat(testFormTemplateField.getRecordField()).isEqualTo(DEFAULT_RECORD_FIELD);
         assertThat(testFormTemplateField.getDescription()).isEqualTo(DEFAULT_DESCRIPTION);
 
         // Validate the FormTemplateField in Elasticsearch
@@ -260,10 +290,82 @@ public class FormTemplateFieldResourceIntTest {
 
     @Test
     @Transactional
+    public void checkLabelIsRequired() throws Exception {
+        int databaseSizeBeforeTest = formTemplateFieldRepository.findAll().size();
+        // set the field null
+        formTemplateField.setLabel(null);
+
+        // Create the FormTemplateField, which fails.
+
+        restFormTemplateFieldMockMvc.perform(post("/api/form-template-fields")
+            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .content(TestUtil.convertObjectToJsonBytes(formTemplateField)))
+            .andExpect(status().isBadRequest());
+
+        List<FormTemplateField> formTemplateFieldList = formTemplateFieldRepository.findAll();
+        assertThat(formTemplateFieldList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
     public void checkDictTypeIsRequired() throws Exception {
         int databaseSizeBeforeTest = formTemplateFieldRepository.findAll().size();
         // set the field null
         formTemplateField.setDictType(null);
+
+        // Create the FormTemplateField, which fails.
+
+        restFormTemplateFieldMockMvc.perform(post("/api/form-template-fields")
+            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .content(TestUtil.convertObjectToJsonBytes(formTemplateField)))
+            .andExpect(status().isBadRequest());
+
+        List<FormTemplateField> formTemplateFieldList = formTemplateFieldRepository.findAll();
+        assertThat(formTemplateFieldList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
+    public void checkSortIsRequired() throws Exception {
+        int databaseSizeBeforeTest = formTemplateFieldRepository.findAll().size();
+        // set the field null
+        formTemplateField.setSort(null);
+
+        // Create the FormTemplateField, which fails.
+
+        restFormTemplateFieldMockMvc.perform(post("/api/form-template-fields")
+            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .content(TestUtil.convertObjectToJsonBytes(formTemplateField)))
+            .andExpect(status().isBadRequest());
+
+        List<FormTemplateField> formTemplateFieldList = formTemplateFieldRepository.findAll();
+        assertThat(formTemplateFieldList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
+    public void checkIsExistRecordIsRequired() throws Exception {
+        int databaseSizeBeforeTest = formTemplateFieldRepository.findAll().size();
+        // set the field null
+        formTemplateField.setIsExistRecord(null);
+
+        // Create the FormTemplateField, which fails.
+
+        restFormTemplateFieldMockMvc.perform(post("/api/form-template-fields")
+            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .content(TestUtil.convertObjectToJsonBytes(formTemplateField)))
+            .andExpect(status().isBadRequest());
+
+        List<FormTemplateField> formTemplateFieldList = formTemplateFieldRepository.findAll();
+        assertThat(formTemplateFieldList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
+    public void checkRecordIdIsRequired() throws Exception {
+        int databaseSizeBeforeTest = formTemplateFieldRepository.findAll().size();
+        // set the field null
+        formTemplateField.setRecordId(null);
 
         // Create the FormTemplateField, which fails.
 
@@ -292,7 +394,13 @@ public class FormTemplateFieldResourceIntTest {
             .andExpect(jsonPath("$.[*].arrayId").value(hasItem(DEFAULT_ARRAY_ID.intValue())))
             .andExpect(jsonPath("$.[*].groupId").value(hasItem(DEFAULT_GROUP_ID.intValue())))
             .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME.toString())))
+            .andExpect(jsonPath("$.[*].label").value(hasItem(DEFAULT_LABEL.toString())))
             .andExpect(jsonPath("$.[*].dictType").value(hasItem(DEFAULT_DICT_TYPE.toString())))
+            .andExpect(jsonPath("$.[*].sort").value(hasItem(DEFAULT_SORT)))
+            .andExpect(jsonPath("$.[*].isExistRecord").value(hasItem(DEFAULT_IS_EXIST_RECORD.booleanValue())))
+            .andExpect(jsonPath("$.[*].recordId").value(hasItem(DEFAULT_RECORD_ID.toString())))
+            .andExpect(jsonPath("$.[*].recordTable").value(hasItem(DEFAULT_RECORD_TABLE.toString())))
+            .andExpect(jsonPath("$.[*].recordField").value(hasItem(DEFAULT_RECORD_FIELD.toString())))
             .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION.toString())));
     }
 
@@ -312,7 +420,13 @@ public class FormTemplateFieldResourceIntTest {
             .andExpect(jsonPath("$.arrayId").value(DEFAULT_ARRAY_ID.intValue()))
             .andExpect(jsonPath("$.groupId").value(DEFAULT_GROUP_ID.intValue()))
             .andExpect(jsonPath("$.name").value(DEFAULT_NAME.toString()))
+            .andExpect(jsonPath("$.label").value(DEFAULT_LABEL.toString()))
             .andExpect(jsonPath("$.dictType").value(DEFAULT_DICT_TYPE.toString()))
+            .andExpect(jsonPath("$.sort").value(DEFAULT_SORT))
+            .andExpect(jsonPath("$.isExistRecord").value(DEFAULT_IS_EXIST_RECORD.booleanValue()))
+            .andExpect(jsonPath("$.recordId").value(DEFAULT_RECORD_ID.toString()))
+            .andExpect(jsonPath("$.recordTable").value(DEFAULT_RECORD_TABLE.toString()))
+            .andExpect(jsonPath("$.recordField").value(DEFAULT_RECORD_FIELD.toString()))
             .andExpect(jsonPath("$.description").value(DEFAULT_DESCRIPTION.toString()));
     }
 
@@ -340,7 +454,13 @@ public class FormTemplateFieldResourceIntTest {
             .arrayId(UPDATED_ARRAY_ID)
             .groupId(UPDATED_GROUP_ID)
             .name(UPDATED_NAME)
+            .label(UPDATED_LABEL)
             .dictType(UPDATED_DICT_TYPE)
+            .sort(UPDATED_SORT)
+            .isExistRecord(UPDATED_IS_EXIST_RECORD)
+            .recordId(UPDATED_RECORD_ID)
+            .recordTable(UPDATED_RECORD_TABLE)
+            .recordField(UPDATED_RECORD_FIELD)
             .description(UPDATED_DESCRIPTION);
 
         restFormTemplateFieldMockMvc.perform(put("/api/form-template-fields")
@@ -357,7 +477,13 @@ public class FormTemplateFieldResourceIntTest {
         assertThat(testFormTemplateField.getArrayId()).isEqualTo(UPDATED_ARRAY_ID);
         assertThat(testFormTemplateField.getGroupId()).isEqualTo(UPDATED_GROUP_ID);
         assertThat(testFormTemplateField.getName()).isEqualTo(UPDATED_NAME);
+        assertThat(testFormTemplateField.getLabel()).isEqualTo(UPDATED_LABEL);
         assertThat(testFormTemplateField.getDictType()).isEqualTo(UPDATED_DICT_TYPE);
+        assertThat(testFormTemplateField.getSort()).isEqualTo(UPDATED_SORT);
+        assertThat(testFormTemplateField.isIsExistRecord()).isEqualTo(UPDATED_IS_EXIST_RECORD);
+        assertThat(testFormTemplateField.getRecordId()).isEqualTo(UPDATED_RECORD_ID);
+        assertThat(testFormTemplateField.getRecordTable()).isEqualTo(UPDATED_RECORD_TABLE);
+        assertThat(testFormTemplateField.getRecordField()).isEqualTo(UPDATED_RECORD_FIELD);
         assertThat(testFormTemplateField.getDescription()).isEqualTo(UPDATED_DESCRIPTION);
 
         // Validate the FormTemplateField in Elasticsearch
@@ -421,7 +547,13 @@ public class FormTemplateFieldResourceIntTest {
             .andExpect(jsonPath("$.[*].arrayId").value(hasItem(DEFAULT_ARRAY_ID.intValue())))
             .andExpect(jsonPath("$.[*].groupId").value(hasItem(DEFAULT_GROUP_ID.intValue())))
             .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME.toString())))
+            .andExpect(jsonPath("$.[*].label").value(hasItem(DEFAULT_LABEL.toString())))
             .andExpect(jsonPath("$.[*].dictType").value(hasItem(DEFAULT_DICT_TYPE.toString())))
+            .andExpect(jsonPath("$.[*].sort").value(hasItem(DEFAULT_SORT)))
+            .andExpect(jsonPath("$.[*].isExistRecord").value(hasItem(DEFAULT_IS_EXIST_RECORD.booleanValue())))
+            .andExpect(jsonPath("$.[*].recordId").value(hasItem(DEFAULT_RECORD_ID.toString())))
+            .andExpect(jsonPath("$.[*].recordTable").value(hasItem(DEFAULT_RECORD_TABLE.toString())))
+            .andExpect(jsonPath("$.[*].recordField").value(hasItem(DEFAULT_RECORD_FIELD.toString())))
             .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION.toString())));
     }
 

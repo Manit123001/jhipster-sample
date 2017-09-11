@@ -28,28 +28,6 @@
             "fieldType": "String"
         },
         {
-            "fieldName": "isExistRecord",
-            "fieldType": "Boolean",
-            "fieldValidateRules": [
-                "required"
-            ]
-        },
-        {
-            "fieldName": "recordId",
-            "fieldType": "String",
-            "fieldValidateRules": [
-                "required"
-            ]
-        },
-        {
-            "fieldName": "recordTable",
-            "fieldType": "String"
-        },
-        {
-            "fieldName": "recordField",
-            "fieldType": "String"
-        },
-        {
             "fieldName": "isDeleted",
             "fieldType": "Boolean",
             "fieldValidateRules": [
