@@ -42,7 +42,7 @@
                 <constraints nullable="false" />
             </column>
 
-            <column name="type_code" type="varchar(255)">
+            <column name="dict_type" type="varchar(255)">
                 <constraints nullable="false" />
             </column>
 

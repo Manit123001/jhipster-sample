@@ -41,6 +41,9 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest(classes = JhipsterSampleApp.class)
 public class SysDictResourceIntTest {
 
+    private static final String DEFAULT_TYPE = "AAAAAAAAAA";
+    private static final String UPDATED_TYPE = "BBBBBBBBBB";
+
     private static final String DEFAULT_CODE = "AAAAAAAAAA";
     private static final String UPDATED_CODE = "BBBBBBBBBB";
 
@@ -93,6 +96,7 @@ public class SysDictResourceIntTest {
      */
     public static SysDict createEntity(EntityManager em) {
         SysDict sysDict = new SysDict()
+            .type(DEFAULT_TYPE)
             .code(DEFAULT_CODE)
             .value(DEFAULT_VALUE)
             .description(DEFAULT_DESCRIPTION);
@@ -120,6 +124,7 @@ public class SysDictResourceIntTest {
         List<SysDict> sysDictList = sysDictRepository.findAll();
         assertThat(sysDictList).hasSize(databaseSizeBeforeCreate + 1);
         SysDict testSysDict = sysDictList.get(sysDictList.size() - 1);
+        assertThat(testSysDict.getType()).isEqualTo(DEFAULT_TYPE);
         assertThat(testSysDict.getCode()).isEqualTo(DEFAULT_CODE);
         assertThat(testSysDict.getValue()).isEqualTo(DEFAULT_VALUE);
         assertThat(testSysDict.getDescription()).isEqualTo(DEFAULT_DESCRIPTION);
@@ -146,6 +151,24 @@ public class SysDictResourceIntTest {
         // Validate the Alice in the database
         List<SysDict> sysDictList = sysDictRepository.findAll();
         assertThat(sysDictList).hasSize(databaseSizeBeforeCreate);
+    }
+
+    @Test
+    @Transactional
+    public void checkTypeIsRequired() throws Exception {
+        int databaseSizeBeforeTest = sysDictRepository.findAll().size();
+        // set the field null
+        sysDict.setType(null);
+
+        // Create the SysDict, which fails.
+
+        restSysDictMockMvc.perform(post("/api/sys-dicts")
+            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .content(TestUtil.convertObjectToJsonBytes(sysDict)))
+            .andExpect(status().isBadRequest());
+
+        List<SysDict> sysDictList = sysDictRepository.findAll();
+        assertThat(sysDictList).hasSize(databaseSizeBeforeTest);
     }
 
     @Test
@@ -177,6 +200,7 @@ public class SysDictResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(sysDict.getId().intValue())))
+            .andExpect(jsonPath("$.[*].type").value(hasItem(DEFAULT_TYPE.toString())))
             .andExpect(jsonPath("$.[*].code").value(hasItem(DEFAULT_CODE.toString())))
             .andExpect(jsonPath("$.[*].value").value(hasItem(DEFAULT_VALUE.toString())))
             .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION.toString())));
@@ -193,6 +217,7 @@ public class SysDictResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(sysDict.getId().intValue()))
+            .andExpect(jsonPath("$.type").value(DEFAULT_TYPE.toString()))
             .andExpect(jsonPath("$.code").value(DEFAULT_CODE.toString()))
             .andExpect(jsonPath("$.value").value(DEFAULT_VALUE.toString()))
             .andExpect(jsonPath("$.description").value(DEFAULT_DESCRIPTION.toString()));
@@ -217,6 +242,7 @@ public class SysDictResourceIntTest {
         // Update the sysDict
         SysDict updatedSysDict = sysDictRepository.findOne(sysDict.getId());
         updatedSysDict
+            .type(UPDATED_TYPE)
             .code(UPDATED_CODE)
             .value(UPDATED_VALUE)
             .description(UPDATED_DESCRIPTION);
@@ -230,6 +256,7 @@ public class SysDictResourceIntTest {
         List<SysDict> sysDictList = sysDictRepository.findAll();
         assertThat(sysDictList).hasSize(databaseSizeBeforeUpdate);
         SysDict testSysDict = sysDictList.get(sysDictList.size() - 1);
+        assertThat(testSysDict.getType()).isEqualTo(UPDATED_TYPE);
         assertThat(testSysDict.getCode()).isEqualTo(UPDATED_CODE);
         assertThat(testSysDict.getValue()).isEqualTo(UPDATED_VALUE);
         assertThat(testSysDict.getDescription()).isEqualTo(UPDATED_DESCRIPTION);
@@ -290,6 +317,7 @@ public class SysDictResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(sysDict.getId().intValue())))
+            .andExpect(jsonPath("$.[*].type").value(hasItem(DEFAULT_TYPE.toString())))
             .andExpect(jsonPath("$.[*].code").value(hasItem(DEFAULT_CODE.toString())))
             .andExpect(jsonPath("$.[*].value").value(hasItem(DEFAULT_VALUE.toString())))
             .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION.toString())));

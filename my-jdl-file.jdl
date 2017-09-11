@@ -13,7 +13,7 @@ entity FormTemplateField {
 	arrayId Long required,
 	groupId Long required,
 	name String required,
-	typeCode String required,
+	dictType String required,
 	description String
 }
 
@@ -52,6 +52,7 @@ entity HealthRecordAttr {
 }
 
 entity SysDict {
+	type String required,
 	code String required,
 	value String,
 	description String

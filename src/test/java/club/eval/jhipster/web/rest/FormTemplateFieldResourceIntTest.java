@@ -56,8 +56,8 @@ public class FormTemplateFieldResourceIntTest {
     private static final String DEFAULT_NAME = "AAAAAAAAAA";
     private static final String UPDATED_NAME = "BBBBBBBBBB";
 
-    private static final String DEFAULT_TYPE_CODE = "AAAAAAAAAA";
-    private static final String UPDATED_TYPE_CODE = "BBBBBBBBBB";
+    private static final String DEFAULT_DICT_TYPE = "AAAAAAAAAA";
+    private static final String UPDATED_DICT_TYPE = "BBBBBBBBBB";
 
     private static final String DEFAULT_DESCRIPTION = "AAAAAAAAAA";
     private static final String UPDATED_DESCRIPTION = "BBBBBBBBBB";
@@ -110,7 +110,7 @@ public class FormTemplateFieldResourceIntTest {
             .arrayId(DEFAULT_ARRAY_ID)
             .groupId(DEFAULT_GROUP_ID)
             .name(DEFAULT_NAME)
-            .typeCode(DEFAULT_TYPE_CODE)
+            .dictType(DEFAULT_DICT_TYPE)
             .description(DEFAULT_DESCRIPTION);
         return formTemplateField;
     }
@@ -141,7 +141,7 @@ public class FormTemplateFieldResourceIntTest {
         assertThat(testFormTemplateField.getArrayId()).isEqualTo(DEFAULT_ARRAY_ID);
         assertThat(testFormTemplateField.getGroupId()).isEqualTo(DEFAULT_GROUP_ID);
         assertThat(testFormTemplateField.getName()).isEqualTo(DEFAULT_NAME);
-        assertThat(testFormTemplateField.getTypeCode()).isEqualTo(DEFAULT_TYPE_CODE);
+        assertThat(testFormTemplateField.getDictType()).isEqualTo(DEFAULT_DICT_TYPE);
         assertThat(testFormTemplateField.getDescription()).isEqualTo(DEFAULT_DESCRIPTION);
 
         // Validate the FormTemplateField in Elasticsearch
@@ -260,10 +260,10 @@ public class FormTemplateFieldResourceIntTest {
 
     @Test
     @Transactional
-    public void checkTypeCodeIsRequired() throws Exception {
+    public void checkDictTypeIsRequired() throws Exception {
         int databaseSizeBeforeTest = formTemplateFieldRepository.findAll().size();
         // set the field null
-        formTemplateField.setTypeCode(null);
+        formTemplateField.setDictType(null);
 
         // Create the FormTemplateField, which fails.
 
@@ -292,7 +292,7 @@ public class FormTemplateFieldResourceIntTest {
             .andExpect(jsonPath("$.[*].arrayId").value(hasItem(DEFAULT_ARRAY_ID.intValue())))
             .andExpect(jsonPath("$.[*].groupId").value(hasItem(DEFAULT_GROUP_ID.intValue())))
             .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME.toString())))
-            .andExpect(jsonPath("$.[*].typeCode").value(hasItem(DEFAULT_TYPE_CODE.toString())))
+            .andExpect(jsonPath("$.[*].dictType").value(hasItem(DEFAULT_DICT_TYPE.toString())))
             .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION.toString())));
     }
 
@@ -312,7 +312,7 @@ public class FormTemplateFieldResourceIntTest {
             .andExpect(jsonPath("$.arrayId").value(DEFAULT_ARRAY_ID.intValue()))
             .andExpect(jsonPath("$.groupId").value(DEFAULT_GROUP_ID.intValue()))
             .andExpect(jsonPath("$.name").value(DEFAULT_NAME.toString()))
-            .andExpect(jsonPath("$.typeCode").value(DEFAULT_TYPE_CODE.toString()))
+            .andExpect(jsonPath("$.dictType").value(DEFAULT_DICT_TYPE.toString()))
             .andExpect(jsonPath("$.description").value(DEFAULT_DESCRIPTION.toString()));
     }
 
@@ -340,7 +340,7 @@ public class FormTemplateFieldResourceIntTest {
             .arrayId(UPDATED_ARRAY_ID)
             .groupId(UPDATED_GROUP_ID)
             .name(UPDATED_NAME)
-            .typeCode(UPDATED_TYPE_CODE)
+            .dictType(UPDATED_DICT_TYPE)
             .description(UPDATED_DESCRIPTION);
 
         restFormTemplateFieldMockMvc.perform(put("/api/form-template-fields")
@@ -357,7 +357,7 @@ public class FormTemplateFieldResourceIntTest {
         assertThat(testFormTemplateField.getArrayId()).isEqualTo(UPDATED_ARRAY_ID);
         assertThat(testFormTemplateField.getGroupId()).isEqualTo(UPDATED_GROUP_ID);
         assertThat(testFormTemplateField.getName()).isEqualTo(UPDATED_NAME);
-        assertThat(testFormTemplateField.getTypeCode()).isEqualTo(UPDATED_TYPE_CODE);
+        assertThat(testFormTemplateField.getDictType()).isEqualTo(UPDATED_DICT_TYPE);
         assertThat(testFormTemplateField.getDescription()).isEqualTo(UPDATED_DESCRIPTION);
 
         // Validate the FormTemplateField in Elasticsearch
@@ -421,7 +421,7 @@ public class FormTemplateFieldResourceIntTest {
             .andExpect(jsonPath("$.[*].arrayId").value(hasItem(DEFAULT_ARRAY_ID.intValue())))
             .andExpect(jsonPath("$.[*].groupId").value(hasItem(DEFAULT_GROUP_ID.intValue())))
             .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME.toString())))
-            .andExpect(jsonPath("$.[*].typeCode").value(hasItem(DEFAULT_TYPE_CODE.toString())))
+            .andExpect(jsonPath("$.[*].dictType").value(hasItem(DEFAULT_DICT_TYPE.toString())))
             .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION.toString())));
     }
 

@@ -3,6 +3,13 @@
     "relationships": [],
     "fields": [
         {
+            "fieldName": "type",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
             "fieldName": "code",
             "fieldType": "String",
             "fieldValidateRules": [

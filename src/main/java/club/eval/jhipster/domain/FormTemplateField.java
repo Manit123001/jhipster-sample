@@ -45,8 +45,8 @@ public class FormTemplateField implements Serializable {
     private String name;
 
     @NotNull
-    @Column(name = "type_code", nullable = false)
-    private String typeCode;
+    @Column(name = "dict_type", nullable = false)
+    private String dictType;
 
     @Column(name = "description")
     private String description;
@@ -125,17 +125,17 @@ public class FormTemplateField implements Serializable {
         this.name = name;
     }
 
-    public String getTypeCode() {
-        return typeCode;
+    public String getDictType() {
+        return dictType;
     }
 
-    public FormTemplateField typeCode(String typeCode) {
-        this.typeCode = typeCode;
+    public FormTemplateField dictType(String dictType) {
+        this.dictType = dictType;
         return this;
     }
 
-    public void setTypeCode(String typeCode) {
-        this.typeCode = typeCode;
+    public void setDictType(String dictType) {
+        this.dictType = dictType;
     }
 
     public String getDescription() {
@@ -181,7 +181,7 @@ public class FormTemplateField implements Serializable {
             ", arrayId='" + getArrayId() + "'" +
             ", groupId='" + getGroupId() + "'" +
             ", name='" + getName() + "'" +
-            ", typeCode='" + getTypeCode() + "'" +
+            ", dictType='" + getDictType() + "'" +
             ", description='" + getDescription() + "'" +
             "}";
     }

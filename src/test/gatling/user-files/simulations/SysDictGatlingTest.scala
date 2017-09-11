@@ -80,7 +80,7 @@ class SysDictGatlingTest extends Simulation {
             .exec(http("Create new sysDict")
             .post("/api/sys-dicts")
             .headers(headers_http_authenticated)
-            .body(StringBody("""{"id":null, "code":"SAMPLE_TEXT", "value":"SAMPLE_TEXT", "description":"SAMPLE_TEXT"}""")).asJSON
+            .body(StringBody("""{"id":null, "type":"SAMPLE_TEXT", "code":"SAMPLE_TEXT", "value":"SAMPLE_TEXT", "description":"SAMPLE_TEXT"}""")).asJSON
             .check(status.is(201))
             .check(headerRegex("Location", "(.*)").saveAs("new_sysDict_url"))).exitHereIfFailed
             .pause(10)

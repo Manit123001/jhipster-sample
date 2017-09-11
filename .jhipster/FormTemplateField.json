@@ -38,7 +38,7 @@
             ]
         },
         {
-            "fieldName": "typeCode",
+            "fieldName": "dictType",
             "fieldType": "String",
             "fieldValidateRules": [
                 "required"
