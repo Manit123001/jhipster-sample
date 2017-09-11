@@ -44,6 +44,9 @@ public class SysDictResourceIntTest {
     private static final String DEFAULT_TYPE = "AAAAAAAAAA";
     private static final String UPDATED_TYPE = "BBBBBBBBBB";
 
+    private static final String DEFAULT_TYPE_CN = "AAAAAAAAAA";
+    private static final String UPDATED_TYPE_CN = "BBBBBBBBBB";
+
     private static final String DEFAULT_CODE = "AAAAAAAAAA";
     private static final String UPDATED_CODE = "BBBBBBBBBB";
 
@@ -97,6 +100,7 @@ public class SysDictResourceIntTest {
     public static SysDict createEntity(EntityManager em) {
         SysDict sysDict = new SysDict()
             .type(DEFAULT_TYPE)
+            .typeCN(DEFAULT_TYPE_CN)
             .code(DEFAULT_CODE)
             .value(DEFAULT_VALUE)
             .description(DEFAULT_DESCRIPTION);
@@ -125,6 +129,7 @@ public class SysDictResourceIntTest {
         assertThat(sysDictList).hasSize(databaseSizeBeforeCreate + 1);
         SysDict testSysDict = sysDictList.get(sysDictList.size() - 1);
         assertThat(testSysDict.getType()).isEqualTo(DEFAULT_TYPE);
+        assertThat(testSysDict.getTypeCN()).isEqualTo(DEFAULT_TYPE_CN);
         assertThat(testSysDict.getCode()).isEqualTo(DEFAULT_CODE);
         assertThat(testSysDict.getValue()).isEqualTo(DEFAULT_VALUE);
         assertThat(testSysDict.getDescription()).isEqualTo(DEFAULT_DESCRIPTION);
@@ -173,6 +178,24 @@ public class SysDictResourceIntTest {
 
     @Test
     @Transactional
+    public void checkTypeCNIsRequired() throws Exception {
+        int databaseSizeBeforeTest = sysDictRepository.findAll().size();
+        // set the field null
+        sysDict.setTypeCN(null);
+
+        // Create the SysDict, which fails.
+
+        restSysDictMockMvc.perform(post("/api/sys-dicts")
+            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .content(TestUtil.convertObjectToJsonBytes(sysDict)))
+            .andExpect(status().isBadRequest());
+
+        List<SysDict> sysDictList = sysDictRepository.findAll();
+        assertThat(sysDictList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
     public void checkCodeIsRequired() throws Exception {
         int databaseSizeBeforeTest = sysDictRepository.findAll().size();
         // set the field null
@@ -201,6 +224,7 @@ public class SysDictResourceIntTest {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(sysDict.getId().intValue())))
             .andExpect(jsonPath("$.[*].type").value(hasItem(DEFAULT_TYPE.toString())))
+            .andExpect(jsonPath("$.[*].typeCN").value(hasItem(DEFAULT_TYPE_CN.toString())))
             .andExpect(jsonPath("$.[*].code").value(hasItem(DEFAULT_CODE.toString())))
             .andExpect(jsonPath("$.[*].value").value(hasItem(DEFAULT_VALUE.toString())))
             .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION.toString())));
@@ -218,6 +242,7 @@ public class SysDictResourceIntTest {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(sysDict.getId().intValue()))
             .andExpect(jsonPath("$.type").value(DEFAULT_TYPE.toString()))
+            .andExpect(jsonPath("$.typeCN").value(DEFAULT_TYPE_CN.toString()))
             .andExpect(jsonPath("$.code").value(DEFAULT_CODE.toString()))
             .andExpect(jsonPath("$.value").value(DEFAULT_VALUE.toString()))
             .andExpect(jsonPath("$.description").value(DEFAULT_DESCRIPTION.toString()));
@@ -243,6 +268,7 @@ public class SysDictResourceIntTest {
         SysDict updatedSysDict = sysDictRepository.findOne(sysDict.getId());
         updatedSysDict
             .type(UPDATED_TYPE)
+            .typeCN(UPDATED_TYPE_CN)
             .code(UPDATED_CODE)
             .value(UPDATED_VALUE)
             .description(UPDATED_DESCRIPTION);
@@ -257,6 +283,7 @@ public class SysDictResourceIntTest {
         assertThat(sysDictList).hasSize(databaseSizeBeforeUpdate);
         SysDict testSysDict = sysDictList.get(sysDictList.size() - 1);
         assertThat(testSysDict.getType()).isEqualTo(UPDATED_TYPE);
+        assertThat(testSysDict.getTypeCN()).isEqualTo(UPDATED_TYPE_CN);
         assertThat(testSysDict.getCode()).isEqualTo(UPDATED_CODE);
         assertThat(testSysDict.getValue()).isEqualTo(UPDATED_VALUE);
         assertThat(testSysDict.getDescription()).isEqualTo(UPDATED_DESCRIPTION);
@@ -318,6 +345,7 @@ public class SysDictResourceIntTest {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(sysDict.getId().intValue())))
             .andExpect(jsonPath("$.[*].type").value(hasItem(DEFAULT_TYPE.toString())))
+            .andExpect(jsonPath("$.[*].typeCN").value(hasItem(DEFAULT_TYPE_CN.toString())))
             .andExpect(jsonPath("$.[*].code").value(hasItem(DEFAULT_CODE.toString())))
             .andExpect(jsonPath("$.[*].value").value(hasItem(DEFAULT_VALUE.toString())))
             .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION.toString())));

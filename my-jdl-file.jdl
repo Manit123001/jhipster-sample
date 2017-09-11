@@ -53,6 +53,7 @@ entity HealthRecordAttr {
 
 entity SysDict {
 	type String required,
+	typeCN String required,
 	code String required,
 	value String,
 	description String

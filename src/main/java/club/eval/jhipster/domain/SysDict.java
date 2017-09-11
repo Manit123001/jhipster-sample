@@ -29,6 +29,10 @@ public class SysDict implements Serializable {
     private String type;
 
     @NotNull
+    @Column(name = "type_cn", nullable = false)
+    private String typeCN;
+
+    @NotNull
     @Column(name = "code", nullable = false)
     private String code;
 
@@ -58,6 +62,19 @@ public class SysDict implements Serializable {
 
     public void setType(String type) {
         this.type = type;
+    }
+
+    public String getTypeCN() {
+        return typeCN;
+    }
+
+    public SysDict typeCN(String typeCN) {
+        this.typeCN = typeCN;
+        return this;
+    }
+
+    public void setTypeCN(String typeCN) {
+        this.typeCN = typeCN;
     }
 
     public String getCode() {
@@ -125,6 +142,7 @@ public class SysDict implements Serializable {
         return "SysDict{" +
             "id=" + getId() +
             ", type='" + getType() + "'" +
+            ", typeCN='" + getTypeCN() + "'" +
             ", code='" + getCode() + "'" +
             ", value='" + getValue() + "'" +
             ", description='" + getDescription() + "'" +
