@@ -1,0 +1,76 @@
+{
+    "fluentMethods": true,
+    "relationships": [],
+    "fields": [
+        {
+            "fieldName": "gmtCreate",
+            "fieldType": "LocalDate",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "gmtModified",
+            "fieldType": "LocalDate",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "type",
+            "fieldType": "Integer",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "sendId",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "touser",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "templateId",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "url",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "miniprogram",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "page",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "formId",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "data",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "emphasiskeyword",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "status",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "result",
+            "fieldType": "String"
+        }
+    ],
+    "changelogDate": "20171027075650",
+    "entityTableName": "import_record_patient",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no"
+}

@@ -1,74 +1,17 @@
-// jhipster import-jdl ./my-jdl-file.jdl --force
-
-entity FormTemplate {
-	parentId Long required,
-	formId String required,
-	name String required,
-	description String
+entity ImportRecordPatient {
+	id String ,
+	gmtCreate LocalDate required,
+	gmtModified LocalDate required,
+  type Integer required,
+  sendId String,
+  touser String,
+  templateId String,
+  url String,
+  miniprogram String,
+  page String,
+  formId String,
+  data String,
+  emphasis_keyword String,
+  status String,
+  result String
 }
-
-entity FormTemplateField {
-	parentId Long required,
-	templateId Long required,
-	arrayId Long required,
-	groupId Long required,
-	name String required,
-	label String required,
-	dictType String required,
-	sort Integer required,
-	isExistRecord Boolean required,
-	recordId String required,
-	recordTable String,
-	recordField String,
-	description String
-}
-
-entity FormTemplateFieldArray {
-	name String required,
-	description String
-}
-
-entity FormTemplateFieldAttr {
-	field_id Long required,
-	attribute String required,
-	attribute_value String,
-	description String
-}
-
-entity FormTemplateFieldGroup {
-	name String required,
-	description String
-}
-
-entity FormTemplateFieldOptions {
-	fieldId Long required,
-	optionCode String required
-}
-
-entity HealthRecordAttr {
-	templateId Long required,
-	templateFieldId Long required,
-	fieldName String required,
-	fieldValue String,
-	isDeleted Boolean required
-}
-
-entity SysDict {
-	type String required,
-	typeCN String required,
-	code String required,
-	value String,
-	description String
-}
-
-// Set pagination options
-paginate * with pagination
-
-// dto * with mapstruct
-
-// Set service options to all
-// service all with serviceImpl
-service all with serviceClass
-
-// Set an angular suffix
-angularSuffix * with mySuperEntities

@@ -48,6 +48,7 @@ public class CacheConfiguration {
             cm.createCache(club.eval.jhipster.domain.FormTemplateFieldOptions.class.getName(), jcacheConfiguration);
             cm.createCache(club.eval.jhipster.domain.HealthRecordAttr.class.getName(), jcacheConfiguration);
             cm.createCache(club.eval.jhipster.domain.SysDict.class.getName(), jcacheConfiguration);
+            cm.createCache(club.eval.jhipster.domain.ImportRecordPatient.class.getName(), jcacheConfiguration);
             // jhipster-needle-ehcache-add-entry
         };
     }

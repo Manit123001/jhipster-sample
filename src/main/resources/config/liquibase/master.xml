@@ -13,6 +13,7 @@
     <include file="config/liquibase/changelog/20170829080308_added_entity_FormTemplateFieldOptions.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20170829080309_added_entity_HealthRecordAttr.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20170905095338_added_entity_SysDict.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20171027075650_added_entity_ImportRecordPatient.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-changelog - JHipster will add liquibase changelogs here -->
     <!-- jhipster-needle-liquibase-add-constraints-changelog - JHipster will add liquibase constraints changelogs here -->
 </databaseChangeLog>
