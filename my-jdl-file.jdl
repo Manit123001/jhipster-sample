@@ -1,17 +1,5 @@
-entity ImportRecordPatient {
-	id String ,
-	gmtCreate LocalDate required,
-	gmtModified LocalDate required,
-  type Integer required,
-  sendId String,
-  touser String,
-  templateId String,
-  url String,
-  miniprogram String,
-  page String,
-  formId String,
-  data String,
-  emphasis_keyword String,
-  status String,
-  result String
+# https://www.jhipster.tech/jdl/
+entity Company {
+	name
+  address
 }
